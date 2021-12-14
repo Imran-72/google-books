@@ -28,7 +28,7 @@ const MainHeader = ({}) => {
           <Button
             className="button"
             color="secondary"
-            onClick={() => dispatch(getBooks())}
+            onClick={() => dispatch(getBooks(query))}
           >
             <i className="fas fa-search"></i>
           </Button>
