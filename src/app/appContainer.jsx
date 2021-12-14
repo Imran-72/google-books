@@ -6,14 +6,14 @@ import MainHeader from "./components/mainHeader";
 import Pagination from "./components/common/pagination";
 import { paginate } from "./utils/paginate";
 import BookCard from "./components/bookCard";
+import { useSelector } from "react-redux";
 
 function AppContainer() {
   // States
-  const [maxResults, setMaxResults] = useState(40);
-  const [startIndex, setStartIndex] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState("");
-  const [cards, setCards] = useState([]);
+
+  const cards = useSelector((state) => state.books.books);
+  const loading = useSelector((state) => state.loader.loading);
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 9;
   const handlePageChange = (pageIndex) => {
@@ -67,16 +67,7 @@ function AppContainer() {
   return (
     <>
       <div className="w-100 h-100">
-        <MainHeader
-          query={query}
-          setQuery={setQuery}
-          startIndex={startIndex}
-          setStartIndex={setStartIndex}
-          maxResults={maxResults}
-          setMaxResults={setMaxResults}
-          setCards={setCards}
-          setLoading={setLoading}
-        />
+        <MainHeader />
         {handleCards()}
         <div className="d-flex justify-content-center">
           <Pagination

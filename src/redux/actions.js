@@ -1,4 +1,5 @@
 import { ADD_QUERY_INPUT, FETCHED_BOOKS } from "./types";
+import { HIDE_LOADER, SHOW_LOADER } from "d:/google-books/src/redux/types";
 
 export function createQuery(text) {
   return {

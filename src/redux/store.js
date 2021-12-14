@@ -1,12 +1,13 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
+import { appReducer } from "./appReducer";
 import { booksReducer } from "./booksReducer";
 import { queryInputReducer } from "./queryInputReducer";
 
 const rootReducer = combineReducers({
   books: booksReducer,
   query: queryInputReducer,
-  // loader: appReducer,
+  loader: appReducer,
 });
 
 export const store = createStore(
