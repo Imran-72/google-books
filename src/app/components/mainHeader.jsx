@@ -1,9 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { InputGroup, Input, Button, FormGroup, Label } from "reactstrap";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { createQuery, getBooks } from "../../redux/actions";
 const MainHeader = ({
-  query,
+  // query,
   setQuery,
   setMaxResults,
   setStartIndex,
@@ -12,33 +14,36 @@ const MainHeader = ({
   setCards,
   setLoading,
 }) => {
-  const handleSubmit = () => {
-    setLoading(true);
-    if (maxResults > 40 || maxResults < 1) {
-      toast.error("max results must be between 1 and 40");
-    } else {
-      axios
-        .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}`
-        )
-        .then((res) => {
-          if (startIndex >= res.data.totalItems || startIndex < 1) {
-            toast.error(
-              `max reults must be between 1 and ${res.data.totalItems}`
-            );
-          } else {
-            if (res.data.items.length > 0) {
-              setCards(res.data.items);
-              setLoading(false);
-            }
-          }
-        })
-        .catch((err) => {
-          setLoading(true);
-          console.log(err.response);
-        });
-    }
-  };
+  // const handleSubmit = () => {
+  //   setLoading(true);
+  //   if (maxResults > 40 || maxResults < 1) {
+  //     toast.error("max results must be between 1 and 40");
+  //   } else {
+  //     axios
+  //       .get(
+  //         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}`
+  //       )
+  //       .then((res) => {
+  //         if (startIndex >= res.data.totalItems || startIndex < 1) {
+  //           toast.error(
+  //             `max reults must be between 1 and ${res.data.totalItems}`
+  //           );
+  //         } else {
+  //           if (res.data.items.length > 0) {
+  //             setCards(res.data.items);
+  //             setLoading(false);
+  //           }
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         setLoading(true);
+  //         console.log(err.response);
+  //       });
+  //   }
+  // };
+
+  const dispatch = useDispatch();
+  const query = useSelector((state) => state.query.query);
   return (
     <div className="main-image d-flex justify-content-center align-items-center flex-column">
       <div className="side-bar"></div>
@@ -54,13 +59,17 @@ const MainHeader = ({
           <Input
             placeholder="Book Search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => dispatch(createQuery(e.target.value))}
           />
-          <Button className="button" color="secondary" onClick={handleSubmit}>
+          <Button
+            className="button"
+            color="secondary"
+            onClick={() => dispatch(getBooks())}
+          >
             <i className="fas fa-search"></i>
           </Button>
         </InputGroup>
-        <div className="d-flex text-white justify-content-center">
+        {/* <div className="d-flex text-white justify-content-center">
           <FormGroup>
             <Label for="maxResults">Max Results</Label>
             <Input
@@ -81,7 +90,7 @@ const MainHeader = ({
               onChange={(e) => setStartIndex(e.target.value)}
             />
           </FormGroup>
-        </div>
+        </div> */}
       </div>
       <ToastContainer />
     </div>
