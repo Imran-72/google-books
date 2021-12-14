@@ -27,6 +27,7 @@ function AppContainer() {
   // Handle Search
 
   const cardsCrop = paginate(cards, currentPage, pageSize);
+  const cardsCrop = paginate(cards, currentPage, pageSize);
 
   const handleCards = () => {
     if (loading) {
