@@ -4,14 +4,15 @@ import { InputGroup, Input, Button } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createQuery, getBooks } from "../../redux/actions";
+import { Filter } from "../styledComponents/filter";
 
-const MainHeader = ({}) => {
+const MainHeader = () => {
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query.query);
+
   return (
     <div className="main-image d-flex justify-content-center align-items-center flex-column">
-      <div className="side-bar"></div>
-      <div className="filter"></div>
+      <Filter />
       <h1
         className="display-2 text-center text-white mb-3"
         style={{ zIndex: 2 }}

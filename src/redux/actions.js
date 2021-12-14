@@ -26,7 +26,7 @@ export function getBooks(query) {
     try {
       dispatch(showLoader());
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=10&startIndex=1`
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40&startIndex=1`
       );
       if (!response.ok) {
         throw new Error("Ошибка запроса");

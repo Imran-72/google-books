@@ -39,9 +39,3 @@ body {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-
-.side-bar {
-  position: absolute;
-  left: 10px;
-  top: 40px;
-}
