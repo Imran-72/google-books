@@ -9,7 +9,10 @@ import { Filter } from "../styledComponents/filter";
 const MainHeader = () => {
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query.query);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getBooks(query));
+  };
   return (
     <div className="main-image d-flex justify-content-center align-items-center flex-column">
       <Filter />
@@ -19,22 +22,21 @@ const MainHeader = () => {
       >
         Google Books
       </h1>
-      <div style={{ width: "60%", zIndex: 2 }}>
+      <form
+        style={{ width: "60%", zIndex: 2 }}
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <InputGroup size="lg" className="mb-3">
           <Input
             placeholder="Book Search"
             value={query}
             onChange={(e) => dispatch(createQuery(e.target.value))}
           />
-          <Button
-            className="button"
-            color="secondary"
-            onClick={() => dispatch(getBooks(query))}
-          >
+          <Button className="button" color="secondary">
             <i className="fas fa-search"></i>
           </Button>
         </InputGroup>
-      </div>
+      </form>
       <ToastContainer />
     </div>
   );
